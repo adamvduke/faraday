@@ -153,7 +153,7 @@ module Faraday
           status, headers, body = stub.block.call(env)
           save_response(env, status, body, headers)
         else
-          raise Stubs::NotFound, "no stubbed request for #{env[:method]} #{normalized_path} #{env[:body]}. Registered stubs: #{stubs}"
+          raise Stubs::NotFound, "no stubbed request for #{env[:method]} #{normalized_path} #{env[:body]}. Registered stubs: #{stubs.instance_variable_get(:@stack)}"
         end
         @app.call(env)
       end
